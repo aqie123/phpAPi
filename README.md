@@ -38,4 +38,6 @@ f.API性能问题定位分析与解决能力
 四：yaf 基本使用
     1.http://www.phpapi.com/?c=index&a=index 首页
     2.Yaf_Route_rewrite COPY到bootstrap 中自定义路由规则
-    
+    3.用户接口类
+        a.php实现mysql增删改查
+        b.登录注册验证函数 
