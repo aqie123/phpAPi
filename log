@@ -253,3 +253,7 @@
 127.0.0.1 - - [26/Sep/2017:14:35:32 +0800] "GET /favicon.ico HTTP/1.1" 200 138 "http://www.phpapi.com/user/reg" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
 127.0.0.1 - - [26/Sep/2017:14:45:25 +0800] "GET /user/reg HTTP/1.1" 200 19 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
 127.0.0.1 - - [26/Sep/2017:14:45:25 +0800] "GET /favicon.ico HTTP/1.1" 200 138 "http://www.phpapi.com/user/reg" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
+127.0.0.1 - - [28/Sep/2017:08:50:22 +0800] "GET /user/reg HTTP/1.1" 200 113 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
+127.0.0.1 - - [28/Sep/2017:08:50:22 +0800] "GET /favicon.ico HTTP/1.1" 200 138 "http://www.phpapi.com/user/reg" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
+127.0.0.1 - - [28/Sep/2017:08:50:40 +0800] "GET /base/index HTTP/1.1" 200 14 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"
+127.0.0.1 - - [28/Sep/2017:08:50:40 +0800] "GET /favicon.ico HTTP/1.1" 200 138 "http://www.phpapi.com/base/index" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36"

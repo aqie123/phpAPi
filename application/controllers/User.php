@@ -5,7 +5,7 @@
  * @desc 默认控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
-class UserController extends BaseController {
+class UserController extends Yaf_Controller_Abstract {
 
 	/** 
      * 默认动作

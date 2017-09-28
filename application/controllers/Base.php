@@ -9,5 +9,11 @@ class BaseController extends Yaf_Controller_Abstract {
 	public function ajaxReturn(){
 		header('Content-Type:application/json; charset=utf-8');
 	    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+	
+	}
+
+	public function indexAction(){
+		echo 'aqie';
+		return false;
 	}
 }
