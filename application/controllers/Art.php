@@ -11,11 +11,22 @@ class ArtController extends Yaf_Controller_Abstract {
 		return $this->listAction();
 	}
 	public function testAction(){
-		echo 'art/test';
+		// echo 'art/test';
 		$model = new ArtModel();
-		$lastid = $model->aqie();
-	     echo $lastid;	
-		return false;
+		$lastid = $model->add('1','2','3',1);
+		if(!$lastid){
+			echo json_encode(array(
+				'errno'=>$model->errno,
+				'errmsg'=>$model->errmsg
+			));
+		}else{
+			echo json_encode(array(
+				'errno'=>0,
+				'errmsg'=>'成功',
+				'data'=>$lastid
+			));
+		}
+		return true;
 	}
 	
 	
@@ -51,8 +62,8 @@ class ArtController extends Yaf_Controller_Abstract {
 		}
 		
 		// 调用模型，做文章内容添加
-/*		$ArtModel = new ArtModel();
-		
+		$ArtModel = new ArtModel();
+	    /*	
 		if($lastId = $ArtModel->add(trim($title), trim($contents), trim($author), trim($cate), $artId)){
 			echo json_encode(array(
 				'errno'=>0,
@@ -61,12 +72,12 @@ class ArtController extends Yaf_Controller_Abstract {
 			));	
 			
 		}else{
-			echo  json_encode(array(
+			echo json_encode(array(
 				'errno'=>$ArtModel->errno,
 				'errmsg'=>$ArtModel->errmsg
 			));
 		}
-*/
+		 */
 		return true;
 	}
     
