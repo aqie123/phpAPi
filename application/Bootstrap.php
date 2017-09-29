@@ -26,6 +26,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 		
 		$router = Yaf_Dispatcher::getInstance()->getRouter();
 		// 创建路由协议实例
+		/*
 		$route = new Yaf_Route_Rewrite(
 			'user/reg',
 			array(
@@ -35,7 +36,19 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 		);
 		// 使用路由器装载路由协议
 		$router->addRoute('user', $route);
+        */ 
 
+		// 文章相关路由
+		
+		$art_route = new Yaf_Route_Rewrite(
+			'art/add',
+			array(
+				'controller' => 'art',
+				'action' => 'add'
+			)
+		);
+		$router->addRoute('art', $art_route);
+		
 
 	}
 
