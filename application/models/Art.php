@@ -16,13 +16,13 @@ class ArtModel {
    public function aqie(){
 		return 666;
    }
-		
+			
 		
   public function add($title,$contents,$author,$cate,$artId=0){
 	  $isEdit = false;
 	  // 编辑操作
 	  if($artId != 0 && is_numeric($artId)){
-			$query = $this->_db->prepare('select count(*) from art where id =?');
+			$query = $this->_db->prepare('select * from art where id =?');
 			$query->execute(array($artId));
 			$ret = $query->fetchAll();
 			if(!$ret || count($ret) != 1){
@@ -76,7 +76,56 @@ class ArtModel {
 			return intval($artId);
 	  }
 	   
-  }// add函数结尾	
+  }// add函数结尾
+	
+  // 删除文章 
+	public function del($artId){
+	  // 判断文章id是否存在
+	  if($artId != 0 && is_numeric($artId)){
+		  $query = $this->_db->prepare('select * from art where id =?');
+		   // $query->debugDumpParams();
+			$query->execute(array($artId));
+			$ret = $query->fetchAll();
+			if(!$ret || count($ret) != 1){
+				$this->errno = -2004;
+				$this->errmsg = '找不到所需要编辑的文章';
+				return false;
+			}
+
+	  }
+
+	  $data = array($artId);
+	  $query = $this->_db->prepare('delete from art where id=?');
+	  $ret = $query->execute($data);
+	  
+	  if(!$ret){
+			$this->errno=-2006;
+			$this->errmsg='删除文章数据失败';
+			return false;
+	  }else{
+			$this->errno=0;
+			$this->errmsg='删除成功';
+			return true;
+	  }
+	  
+  }	
+
+  // 修改文章状态
+  public function status($artId,$status='offline'){
+	$data = array( $status, $artId);
+	$query = $this->_db->prepare('update art set status = ? where id=?');	
+	$ret = $query->execute($data);
+	  if(!$ret){
+			$this->errno=-2006;
+			$this->errmsg='编辑文章状态失败';
+			return false;
+	  }else{
+			$this->errno=0;
+			$this->errmsg='编辑文章状态成功';
+			return true;
+	  }
+
+  }
 }
 
 

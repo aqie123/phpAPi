@@ -122,11 +122,71 @@ class ArtController extends Yaf_Controller_Abstract {
 	 
 
 	public function delAction(){
-		return true;
+		// 是否是管理员
+		if(!$this->_isAdmin()){
+			echo json_encode(array('errno'=>-2000, 'errmsg'=>'需要管理员才能操作'));
+			return false;
+		}
+
+		$artId = $this->getRequest()->getQuery('artId','0');
+		if(is_numeric($artId) && $artId){
+			$model = new ArtModel();
+			$ret = $model->del($artId); 
+			if($ret){
+				echo json_encode(array(
+					'errno'=>0,
+					'errmsg'=>'',
+					'data'=>$ret
+				));
+			}else{
+				echo json_encode(array(
+					'errno'=>$model->errno,
+					'errmsg'=>$model->errmsg,
+					'data'=>$ret
+				));
+				
+			}
+
+		}else{
+			echo json_encode(array(
+				'errno'=>-2003,
+				'errmsg'=>'缺少文章id'
+			));
+		}
+		return false;
 	}
 
 	public function statusAction(){
+		// 是否是管理员
+		if(!$this->_isAdmin()){
+			echo json_encode(array('errno'=>-2000, 'errmsg'=>'需要管理员才能操作'));
+			return false;
+		}
+
+		$artId = $this->getRequest()->getQuery('artId','0');
+		$status = $this->getRequest()->getQuery('status','offline');
 		
+		if(is_numeric($artId) && $artId){
+			$model = new ArtModel();
+			if($model->status($artId, $status)){
+				echo json_encode(array(
+					'errno'=>0,
+					'errmsg'=>$model->errmsg
+				));
+			}else{
+				echo json_encode(array(
+					'errno'=>$model->errno,
+					'errmsg'=>$model->errmsg
+				));
+			}
+		}else{
+			echo json_encode(array(
+				'errno'=>-2003,
+				'errmsg'=>'缺少文章id'
+			));
+			
+		}
+        return false;		
 	}
 
 	public function getAction(){
