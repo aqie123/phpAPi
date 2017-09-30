@@ -18,7 +18,7 @@ class ArtModel {
    }
 		
 		
-  public function add($title,$content,$author,$cate,$artId=0){
+  public function add($title,$contents,$author,$cate,$artId=0){
 	  $isEdit = false;
 	  // 编辑操作
 	  if($artId != 0 && is_numeric($artId)){
@@ -48,12 +48,15 @@ class ArtModel {
 	  
 	  $data = array($title, $contents, $author, intval($cate));
 	  if(!$isEdit){
-			$query = $this->_db->prepare('insert into art(title,contents,author,cate) values(?,?,?,?)');
+			$query = $this->_db->prepare("insert into art(title,contents,author,cate) values(?,?,?,?)");
 	  }else{
-			$query = $this->_db->prepare('update art set title=?,contents=?,author=?,cate=? where id=?');
+			$query = $this->_db->prepare("update art set title=?,contents=?,author=?,cate=? where id=?");
 			$data[] = $artId;
 	  }
+	  // 打印sql预处理语句
+	  //$query->debugDumpParams(); 
 	  $ret = $query->execute($data);
+	 
 	  
 	  if(!$ret){
 			$this->errno=-2006;
@@ -62,9 +65,8 @@ class ArtModel {
 	  }else{
 			$this->errno=0;
 			$this->errmsg='插入数据成功';
-			return true;
 	  }
-	  
+	 // return json_encode($data); 	     
 	  // 返回文章最后id
 
 	  if(!$isEdit){

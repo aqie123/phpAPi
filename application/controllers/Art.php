@@ -26,9 +26,9 @@ class ArtController extends Yaf_Controller_Abstract {
 				'data'=>$lastid
 			));
 		}
-		return true;
+		return false;
 	}
-	
+		
 	
 	public function addAction($artId=0){
 		// 是否是管理员
@@ -45,7 +45,7 @@ class ArtController extends Yaf_Controller_Abstract {
 			));
 			return false;
 		}
-
+		
 		// 获取文章提交参数
 		$title = $this->getRequest()->getPost('title',false);
 		$contents = $this->getRequest()->getPost('contents', false);
@@ -63,7 +63,7 @@ class ArtController extends Yaf_Controller_Abstract {
 		
 		// 调用模型，做文章内容添加
 		$ArtModel = new ArtModel();
-	    /*	
+	   /* 	
 		if($lastId = $ArtModel->add(trim($title), trim($contents), trim($author), trim($cate), $artId)){
 			echo json_encode(array(
 				'errno'=>0,
@@ -77,8 +77,22 @@ class ArtController extends Yaf_Controller_Abstract {
 				'errmsg'=>$ArtModel->errmsg
 			));
 		}
-		 */
-		return true;
+		*/
+		$lastId = $ArtModel->add($title,$contents,$author,$cate,$artId);
+		if($lastId){
+			echo json_encode(array(
+				'errno'=>0,
+				'errmsg'=>'',
+				'data'=>array('lastId'=>$lastId)
+			));
+
+		} else{
+			echo json_encode(array(
+				'errno'=>$ArtModel->errno,
+				'errmsg'=>$ArtModel->errmsg
+			));
+		}
+		return false;
 	}
     
 	 
@@ -103,7 +117,7 @@ class ArtController extends Yaf_Controller_Abstract {
 			));
 		}
 		
-		return true;
+		return false;
 	}
 	 
 
