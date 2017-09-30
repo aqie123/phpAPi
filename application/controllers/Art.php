@@ -28,7 +28,7 @@ class ArtController extends Yaf_Controller_Abstract {
 		}
 		return false;
 	}
-		
+			
 	
 	public function addAction($artId=0){
 		// 是否是管理员
@@ -191,9 +191,15 @@ class ArtController extends Yaf_Controller_Abstract {
 
 	public function listAction(){
 		// 判断是否是管理员
-
+     
+	 $pageNumber = $this->getRequest()->getpost('pageNumber', '0');
+	 $pageSize   = $this->getRequest()->getpost('pageSize', '10');
+	 $cate = $this->getRequest()->getpost('cate', '0');
+	 $status = $this->getRequest()->getpost('status', 'online');
+		
+     
 	 $model = new ArtModel();
-	 $data = $model->mylist();
+	 $data = $model->mylist($pageNumber, $pageSize, $cate, $status);
 		echo json_encode(array(
 			'errno'=>$model->errno,
 			'errmsg'=>$model->errmsg,

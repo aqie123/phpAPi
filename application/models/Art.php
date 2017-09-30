@@ -11,6 +11,7 @@ class ArtModel {
 
 	public function __construct() {
 		$this->_db = new PDO('mysql:host=127.0.0.1;dbname=test;', 'root', 'root');
+		$this->_db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }   
     
    public function aqie(){
@@ -157,8 +158,8 @@ class ArtModel {
     return $artInfo;
   }
  
-  // 获取文章列表
-  public function mylist(){
+  // 获取文章列表(实现分页功能)
+  public function mylist2(){
 	$artInfo = null;
 	$query = $this->_db->prepare('select * from art');
     $query->execute();
@@ -187,6 +188,31 @@ class ArtModel {
 		unset($v['cate']);
 	}
 	return $artInfo;
+  }
+
+  // 分页获取文章列表
+  public function mylist($pageNumber=0,$pageSize=10,$cate=0,$status='online'){
+	  $start = $pageNumber * $pageSize + ($pageNumber==0?0:1);
+	  if($cate==0){
+		$filter = array($status, $start,$pageSize);
+		$query = $this->_db->prepare('select * from art where status=? order by ctime desc limit ?,?');
+	  }else{
+		$filter = array($cate, $status, $start,$pageSize);
+		$query = $this->_db->prepare('select * from art where cate=? and status=? order by ctime desc limit ?,?');
+	  }
+
+	  //  $query->debugDumpParams();
+	  $status = $query->execute($filter);
+	  $ret = $query->fetchAll(PDO::FETCH_ASSOC);
+	  if(!$ret){
+		  $this->errno = -2011;
+		  $this->errmsg = '获取文章列表失败';
+		  return $status;
+	  }else{
+		 $this->errno = 0;
+		 $this->errmsg = '';
+		 return $ret;
+	  }
   }
 }
 
