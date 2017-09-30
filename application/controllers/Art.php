@@ -189,12 +189,36 @@ class ArtController extends Yaf_Controller_Abstract {
         return false;		
 	}
 
-	public function getAction(){
-		
+	public function listAction(){
+		// 判断是否是管理员
+
+	 $model = new ArtModel();
+	 $data = $model->mylist();
+		echo json_encode(array(
+			'errno'=>$model->errno,
+			'errmsg'=>$model->errmsg,
+			'data'=>$data
+	    ));
+		return false;	 
 	}
 
-	public function listAction(){
-		
+	public function getAction(){
+		$artId = $this->getRequest()->getQuery('artId','0');
+        if(is_numeric($artId) && $artId){
+			$model = new ArtModel();
+			$data = $model->get($artId);
+			echo json_encode(array(
+				'errno'=>$model->errno,
+				'errmsg'=>$model->errmsg,
+				'data'=>$data
+			));
+		}else{
+			echo json_encode(array(
+				'errno'=>-2003,
+				'errmsg'=>'缺少必要的文章id'
+			));
+		}	
+		return false;
 	
 	}
 

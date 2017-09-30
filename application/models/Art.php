@@ -17,7 +17,7 @@ class ArtModel {
 		return 666;
    }
 			
-		
+			
   public function add($title,$contents,$author,$cate,$artId=0){
 	  $isEdit = false;
 	  // 编辑操作
@@ -125,6 +125,68 @@ class ArtModel {
 			return true;
 	  }
 
+  }
+ 
+  // 获取单个文章
+  public function get($artId){
+	$data = array($artId);
+	$query = $this->_db->prepare('select * from art where id=?');
+	$status = $query->execute($data);
+	$ret = $query->fetchAll(PDO::FETCH_ASSOC);
+	if(!$ret || !$status){
+		$this->errno = -2009;
+		$this->errmsg = '查询失败';
+		return false;
+	}else{
+		$this->errno = 0;
+		$this->errmsg = '';
+		$artInfo = $ret[0];
+	}
+
+	// 获取分类信息
+	$query = $this->_db->prepare('select name from cate where id=?');
+	$status = $query->execute(array($artInfo['cate']));
+	$ret = $query->fetchAll(PDO::FETCH_ASSOC);
+	if(!$ret){
+		$this->errno = -2010;
+		$this->errmsg = '获取分类信息失败';
+		return false;
+	}
+	$artInfo['cateName'] = $ret[0]['name'];
+	unset($artInfo['cate']);
+    return $artInfo;
+  }
+ 
+  // 获取文章列表
+  public function mylist(){
+	$artInfo = null;
+	$query = $this->_db->prepare('select * from art');
+    $query->execute();
+    $ret = $query->fetchAll(PDO::FETCH_ASSOC);
+	if(!$ret){
+		$this->errno = -2010;
+		$this->errmsg = '查询文章列表失败';
+		return false;
+	}else{
+		$this->errno = 0;
+		$this->errmsg = '';
+		$artInfo = $ret;
+	}
+
+	// 获取分类信息
+	foreach($artInfo as $k => &$v){
+		$query = $this->_db->prepare('select name from cate where id =?');
+		$query->execute(array($v['cate']));
+		$ret = $query->fetch(PDO::FETCH_ASSOC);
+		if(!$ret){
+		  $this->errno = -2010;
+		  $this->errmsg = '获取分类信息失败';
+		  return false;	
+		}
+		$v['cateName'] = $ret['name'];
+		unset($v['cate']);
+	}
+	return $artInfo;
   }
 }
 
