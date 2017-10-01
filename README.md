@@ -44,3 +44,13 @@ f.API性能问题定位分析与解决能力
     3.用户接口类
         a.php实现mysql增删改查
         b.登录注册验证函数 
+
+五：邮件服务接口
+		1.phpMailer(composer)		
+			a.开启socket
+			b.安装composer(https://getcomposer.org/download/)
+			c.进入项目目录php composer-setup.php
+			 ./composer.phar require phpmailer/phpmailer
+			d.配置中国源
+					./composer.phar config -g repo.packagist composer https://packagist.phpcomposer.com
+		   e. 安装邮件扩展composer require nette/mail
