@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>用户中心_IPIP.NET</title>
+<link href="https://cdn.ipip.net" rel="dns-prefetch" />
+<link href="https://cdn.ipip.net/frontend/bootstrap/3.2.0/css/bootstrap.min.css?78854.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.ipip.net/loveapp/theme/jslib/jquery.min.js" charset="UTF-8"></script>
+    <script src="https://cdn.ipip.net/frontend/bootstrap/3.2.0/js/bootstrap.min.js" charset="UTF-8"></script>
+    <style>
+        .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container{width:1200px;}
+        .container{ width: 1200px;}
+    </style>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-28114143-1','auto');ga('send','pageview');</script></head>
+
+<body>
+<div class="navbar navbar-default">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" style="padding: 0px;" href="http://www.ipip.net"><img src="https://cdn.ipip.net/loveapp/ipip/www/theme/css/img/ipip.png" height="30" style="height:30px;float: left;display: block;margin-top: 5px;"/></a>
+            <ul class="nav navbar-nav">
+                            </ul>
+                    </div>
+    </div>
+</div>
+<div style="min-width: 1200px; max-width: 1500px; margin: 10px auto;">
+    <div class="row" style="margin-top: 30px;margin-bottom: 60px;">
+    <form class="form-horizontal col-sm-8 col-sm-offset-2" method="post" action="/login.php">
+        <fieldset>
+            <legend style="margin-bottom: 60px;">用户登录</legend>
+            <input type="hidden" name="csrf_token" value=""/>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="inputEmail">邮箱：</label>
+                <div class="col-sm-4">
+                    <input type="text" name="mail" class="form-control" id="inputEmail" placeholder="您注册时填写的邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="inputPassword">密码：</label>
+                <div class="col-sm-4">
+                    <input type="password" name="pass" class="form-control" id="inputPassword">
+                </div>
+                <div class="col-sm-6">密码长度6-20个字符，不能包含空格</div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <button type="submit" class="btn btn-primary">登 录</button>
+                    <a href="/register.html" class="btn">注 册</a>
+                    <a href="/forget.html" style="font-size: 12px;margin-left: 20px;">忘记密码</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div></div>
+<div style="text-align: center">
+    © 2013 - 2017&nbsp;北京天特信科技有限公司&nbsp;所有权利保留
+</div>
+</body>
+</html>

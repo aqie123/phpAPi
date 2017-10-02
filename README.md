@@ -53,4 +53,21 @@ f.API性能问题定位分析与解决能力
 			 ./composer.phar require phpmailer/phpmailer
 			d.配置中国源
 					./composer.phar config -g repo.packagist composer https://packagist.phpcomposer.com
-		   e. 安装邮件扩展composer require nette/mail
+			   e. 安装邮件扩展composer require nette/mail
+
+六.扩展第三方
+	1.SMS短信发送API
+		1.http://sms.cn/
+		2. 新建 ThirdParty 将第三方库 复制进来,并重命名
+	2.IP地址查询API（http://www.ipip.net/）
+		a.应用场景
+			1.访问来源统计
+			2.小流量线上验证
+			3.黑名单
+		b.
+			1.git@github.com:17mon/php.git
+			2.下载到library文件夹下
+	3.APP push消息API
+		1.个推(aqie phpapi123),小米，极光推送
+		2.http://www.getui.com/download/docs/server/GETUI_PHP_SDK.zip 
+	4.基于微信支付API
