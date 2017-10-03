@@ -73,3 +73,13 @@ f.API性能问题定位分析与解决能力
 	4.基于微信支付API
 		1.商品价格跟着订单走
 		2.
+七。API接口提炼(功能实现->功能工程化->功能调优->功能迭代)
+	1.APi自测脚本i
+		a.安装curl ./composer.phar require curl/curl
+		b.php-curl-class/php-curl-class
+		c.pingplusplus/pingpp-php
+	2.API公共lib的抽离
+	3.数据操作层DBO
+	4.接口处理异常规范
+	5.Api功能整合
+	6.API文档

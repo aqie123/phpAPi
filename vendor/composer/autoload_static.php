@@ -20,6 +20,16 @@ class ComposerStaticInitea258d6c65b4b66e00eab2c512b38561
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'Curl' => 
+            array (
+                0 => __DIR__ . '/..' . '/curl/curl/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Bridges\\MailDI\\MailExtension' => __DIR__ . '/..' . '/nette/mail/src/Bridges/MailDI/MailExtension.php',
@@ -80,6 +90,7 @@ class ComposerStaticInitea258d6c65b4b66e00eab2c512b38561
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitea258d6c65b4b66e00eab2c512b38561::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitea258d6c65b4b66e00eab2c512b38561::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitea258d6c65b4b66e00eab2c512b38561::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitea258d6c65b4b66e00eab2c512b38561::$classMap;
 
         }, null, ClassLoader::class);
