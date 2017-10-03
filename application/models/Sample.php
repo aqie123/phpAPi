@@ -14,5 +14,9 @@ class SampleModel {
 
     public function insertSample($arrInfo) {
         return true;
-    }
+	}
+
+	public function aqie(){
+		return 666;
+	}
 }

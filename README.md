@@ -71,3 +71,5 @@ f.API性能问题定位分析与解决能力
 		1.个推(aqie phpapi123),小米，极光推送
 		2.http://www.getui.com/download/docs/server/GETUI_PHP_SDK.zip 
 	4.基于微信支付API
+		1.商品价格跟着订单走
+		2.
