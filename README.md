@@ -79,7 +79,13 @@ f.API性能问题定位分析与解决能力
 		b.php-curl-class/php-curl-class
 		c.pingplusplus/pingpp-php
 	2.API公共lib的抽离
+		a.lib库抽离
+			1.新建library/Common/Request.php
+		b.sdk统一管理
+		c.composer管理第三方类库
+		d.
 	3.数据操作层DBO
+		a.private
 	4.接口处理异常规范
 	5.Api功能整合
 	6.API文档
