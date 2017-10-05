@@ -37,7 +37,7 @@ class ArtController extends Yaf_Controller_Abstract {
 			return false;
 		}
 		// 是否是正常途径登录
-		$submit = $this->getRequest()->getQuery('submit', '0');
+		$submit = $this->getRequest()->getPost('submit', '0');
 		if($submit != '1'){
 			echo json_encode(array(
 				'errno'=>-1001,

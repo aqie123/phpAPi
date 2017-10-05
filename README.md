@@ -87,5 +87,32 @@ f.API性能问题定位分析与解决能力
 	3.数据操作层DBO
 		a.private
 	4.接口处理异常规范
+		a.统一的API接口异常,错误字典信息
+			1.library/Err/Map.php
+		b.统一的API异常处理,容错和降级
 	5.Api功能整合
+		a. isAdmin();
 	6.API文档
+		a. PHPDocument
+	7.orm扩展
+		a.DB事务操作
+		b.ORM框架db操作
+八。API接口性能
+	1.接口性能信息收集
+		a.
+		b.rustjason/xhprof
+		c.安装libpng包
+	2.API时间开销定位与分析
+		a. 安装redis 优化文章查询 Art.php
+	3.API上下游性能优化
+		1.mysql时间开销优化
+		2.后端服务调优
+		3.api返回调优 (nginx压缩模块)
+		4.
+	4.API服务稳定性SLA (supervisor  http://blog.csdn.net/wawa8899/article/details/52743861)
+		1.服务监控
+		2.yum install python-setuptools
+		3.API负载均衡
+		4.服务报警
+		5.api测试用例
+			unit测试用例

@@ -11,21 +11,18 @@ class UserModel {
 	public function __construct() {
 		$this->_dao = new Db_User();
 		
-		$this->_db = new PDO('mysql:host=127.0.0.1;dbname=test;', 'root', 'root');
 	}   
 
 	
 	public function register($uname, $pwd){
 		$res = $this->_dao->findName($uname);
 		if($res){
-			$this->errno = -1005;
-			$this->errmsg = '用户名已存在';
+			list($this->errno,$this->errmsg) = Err_Map::aqieget(1005);
 			return false;
 		}
 
 		if(strlen($pwd) < 4){
-			$this->errno = -1006;
-			$this->errmsg = '密码不得小于四位';
+		    list($this->errno,$this->errmsg) = Err_Map::aqieget(1006);	
 			return false;
 		}else{
 			$pwd = Common_Function::genpwd($pwd);
@@ -51,8 +48,7 @@ class UserModel {
 			$this->errmsg = $this->_dao->errmsg();
 		}
 		if($pwd != $userInfo['password']){
-			$this->errno = -1004;
-			$this->errmsg = '用户名或密码错误'.$userInfo['password'];
+		    list($this->errno,$this->errmsg) = Err_Map::aqieget(1004);	
 			return false;
 		}
 		return intval($userInfo['admin_id']);

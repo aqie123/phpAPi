@@ -4,6 +4,9 @@
  * @desc base数据获取类, 可以访问数据库，文件，其它系统等
  * @author aqie
  */
+
+include_once(dirname(__FILE__).'/../../vendor/autoload.php');
+
 class ArtModel {
 	public $errno = 0;
 	public $errmsg = '';
@@ -34,17 +37,25 @@ class ArtModel {
 
 	        $isEdit = true;
 	  } else {
-			// 检查cate是否存在
-		  $query = $this->_db->prepare('select count(*) from cate where id =?');
-		  $query->execute(array($cate));
-		  $ret = $query->fetchAll();
-		  if(!$ret || $ret[0][0] == 0){
-				$this->errno = -2005;
-				$this->errmsg = '找不到对应文章分类';
-				return false;
-		  }
+		  // 检查cate是否存在
+
+		  $redis = new Predis\Client();
+		  $redisKey = 'cateExists-'.$cate;
+		  $redisValue = 1;
+		  
+		  if(!$redis->get($redisKey)){
+			  $query = $this->_db->prepare('select count(*) from cate where id =?');
+			  $query->execute(array($cate));
+			  $ret = $query->fetchAll();
+			  if(!$ret || $ret[0][0] == 0){
+					$this->errno = -2005;
+					$this->errmsg = '找不到对应文章分类';
+					return false;
+			  }else{
+				 $redis->set($redisKey, $redisValue);
+			  }
+		   }
 	  }
-	  
 	  // 插入或者更新文章内容
 	  
 	  $data = array($title, $contents, $author, intval($cate));

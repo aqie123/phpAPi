@@ -46,26 +46,35 @@ class AqiepayModel extends WxPayNotify{
 		}
 
 		// 创建订单bill
-		$query = $this->_db->prepare('insert into bill(itemid,uid,price,status) values(?,?,?,"unpaid")');
-		$res = $query->execute(array($itemId,$uid,$ret['price']));
-		// $query->debugDumpParams();
-		if(!$res){
-			$this->errno = -6006;
-			$this->errmsg = '创建订单失败';
-			return false;
+		try{
+			$this->_db->beginTransaction();		// 开启事务
+
+			$query = $this->_db->prepare('insert into bill(itemid,uid,price,status) values(?,?,?,"unpaid")');
+			$res = $query->execute(array($itemId,$uid,$ret['price']));
+			// $query->debugDumpParams();
+			if(!$res){
+				$this->errno = -6006;
+				$this->errmsg = '创建订单失败';
+				// return false;
+				throw new PDOException('创建订单异常');
+			}
+
+			$lastId = intval($this->_db->lastInsertId());
+
+			// 减库存
+			$query = $this->_db->prepare('update item set stock=stock-1 where id = ?');
+			$ret = $query->execute(array($itemId));
+			if(!$ret){
+				$this->errno = -6006;
+				$this->errmsg = '更新库存失败';
+				throw new PDOException('更新库存失败');
+				// return false;
+			}
+			$this->_db->commit();
+		}catch(PDOException $e){
+			$e->getMessage();
+			$this->_db->rollback();
 		}
-
-		$lastId = intval($this->_db->lastInsertId());
-
-		// 减库存
-		$query = $this->_db->prepare('update item set stock=stock-1 where id = ?');
-		$ret = $query->execute(array($itemId));
-		if(!$ret){
-			$this->errno = -6006;
-			$this->errmsg = '更新库存失败';
-			return false;
-		}
-
 		return $lastId;
 
 
