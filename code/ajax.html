@@ -1,0 +1,26 @@
+<html>
+	<head>
+	<meta charset="UTF-8"/>
+	<title>测试ajax跨域访问</title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1> 测试跨域访问</h1>
+		
+		<script>
+			$(function(){
+				// alert($);
+				$.ajax({
+					type: 'GET',
+					url: 'http://192.168.144.128',
+					success: function($data){
+						alert('success');
+					},
+					error: function($data){
+						alert('faile');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
