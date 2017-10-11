@@ -1,0 +1,24 @@
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<h1>this is static page</h1>
+		<div id="ajaxDync"></div>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+	      $.ajax({  
+		    url:'./dynamic.php?action=ok',  
+		    type:'get',  
+		    cache : false,
+		  success:function(data){  
+		      $("#ajaxDync").html(data);  
+		  }
+	      });
+	});
+	</script>
+	</body>
+
+</html>
