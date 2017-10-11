@@ -1,0 +1,46 @@
+
+user  nginx;
+worker_processes  2;
+worker_cpu_affinity auto;
+
+load_module modules/ngx_http_geoip_module.so;
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+worker_rlimit_nofile 10240;
+
+events {
+	use epoll;
+    worker_connections  10240;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+	charset utf-8;
+
+	# lua_package_path "/etc/nginx/waf/?.lua";
+	# lua_shared_dict limit 10m;
+	# init_by_lua_file /etc/nginx/waf/init.lua;
+	# access_by_lua_file /etc/nginx/waf/waf.lua;
+    log_format  main  '$http_user_agent' '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+	#access_log off;	
+
+    sendfile        on;
+    #tcp_nopush     on;
+	#tcp_nodeny		on;
+
+    keepalive_timeout  65;
+
+    gzip  on;
+	gzip_disable "MSIE [1-6]\.";
+	gzip_http_version	1.1;
+
+	#Virtal Server
+    include /etc/nginx/conf.d/*.conf;
+}
